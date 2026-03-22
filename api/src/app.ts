@@ -9,7 +9,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173',
-      'https://nasa-space-explorer-blue.vercel.app',
+      'https://nasa-space-explorer-blue.vercel.app/api',
     ],
   }),
 )
