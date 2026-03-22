@@ -1,11 +1,7 @@
 import axios from 'axios'
-const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:10000/api'
+const API_URL = import.meta.env.VITE_API_URL
 console.log('VITE_API_URL:', import.meta.env.VITE_API_URL)
-console.log('Environment:', process.env.NODE_ENV)
-console.log('API URL:', API_URL)
+const API = API_URL ? API_URL + 'api' : 'http://localhost:10000/api'
 export const api = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'production'
-      ? API_URL
-      : 'http://localhost:10000/api',
+  baseURL: API,
 })
