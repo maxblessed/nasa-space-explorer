@@ -1,4 +1,3 @@
-// features/apod/hooks/useApodRange.ts
 import { useQuery } from '@tanstack/react-query'
 import { api } from '../../../api/nasaApi'
 
@@ -21,6 +20,5 @@ export const useApodRange = (
       return data
     },
     enabled: !!startDate && !!endDate,
-    // keepPreviousData: true, // 🔥 smooth pagination
   })
 }

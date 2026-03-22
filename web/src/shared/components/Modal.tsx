@@ -65,7 +65,6 @@ export default function Modal({ item, setItem }: ModalProps) {
               {dayjs(item.date).format('MMM D, YYYY')}
             </Typography>
 
-            {/* Explanation */}
             <Typography
               variant='body2'
               sx={{

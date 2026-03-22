@@ -1,4 +1,3 @@
-// shared/components/Hero.tsx
 import { Box, Typography } from '@mui/material'
 import { useApod } from '../../features/apod/hooks/useApod'
 import dayjs from 'dayjs'

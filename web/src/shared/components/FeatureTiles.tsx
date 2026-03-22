@@ -1,4 +1,3 @@
-// shared/components/FeatureTiles.tsx
 import { Box, Typography, Paper } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 

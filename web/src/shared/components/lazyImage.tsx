@@ -13,10 +13,7 @@ export default function LazyImage({ src, alt, height = 160 }: Props) {
 
   return (
     <Box sx={{ position: 'relative', height }}>
-      {/* Skeleton */}
       {loading && <Skeleton variant='rectangular' width='100%' height='100%' />}
-
-      {/* Image */}
       <Box
         component='img'
         src={error ? 'https://via.placeholder.com/400x300?text=No+Image' : src}

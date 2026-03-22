@@ -1,9 +1,8 @@
 import axios from 'axios'
 import { ApodResponse } from './apod.types'
 
-const BASE_URL = 'https://api.nasa.gov'
+const BASE_URL = process.env.BASE_URL
 const API_KEY = process.env.NASA_API_KEY
-console.log('Using NASA API Key:', API_KEY)
 export const getApodData = async (): Promise<ApodResponse> => {
   const res = await axios.get<ApodResponse>(`${BASE_URL}/planetary/apod`, {
     params: { api_key: API_KEY },

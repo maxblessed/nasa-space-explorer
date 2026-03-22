@@ -43,7 +43,7 @@ export const theme = createTheme({
       },
     },
 
-    // DatePicker / TextField fix
+    // DatePicker / TextField
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
