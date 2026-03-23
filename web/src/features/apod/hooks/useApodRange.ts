@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { api } from '../../../api/nasaApi'
+import { cacheConfig } from '../../../constant'
 
 export const useApodRange = (
   startDate: string,
@@ -20,5 +21,6 @@ export const useApodRange = (
       return data
     },
     enabled: !!startDate && !!endDate,
+    ...cacheConfig,
   })
 }
