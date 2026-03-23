@@ -1,8 +1,17 @@
 import { Typography, Box } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 export default function Logo() {
+  const navigate = useNavigate()
+
   return (
-    <Box display='flex' alignItems='center' gap={1}>
+    <Box
+      display='flex'
+      alignItems='center'
+      gap={1}
+      onClick={() => navigate('/')}
+      sx={{ cursor: 'pointer' }}
+    >
       <Box
         sx={{
           width: 32,
