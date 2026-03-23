@@ -2,7 +2,18 @@ import { Box, Typography, Paper } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import dayjs from 'dayjs'
 import { useApodAnalysis } from '../features/apod/hooks/useApodAnalysis'
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Bar,
+} from 'recharts'
 import { useDateRange } from '../shared/hooks/useDateRange'
 import ChartSkeleton from '../shared/components/ChartSkeleton'
 import ErrorState from '../shared/components/ErrorState'
@@ -22,7 +33,10 @@ export default function Dashboard() {
     startDate.format('YYYY-MM-DD'),
     endDate.format('YYYY-MM-DD'),
   )
-
+  const chartData = [
+    { name: 'Images', value: data?.images || 0 },
+    { name: 'Videos', value: data?.videos || 0 },
+  ]
   return (
     <Box sx={{ px: { xs: 2, md: 8 }, py: 6 }}>
       <Typography variant='h4' sx={{ color: 'text.primary' }}>
@@ -74,26 +88,44 @@ export default function Dashboard() {
       >
         {isLoading && <ChartSkeleton />}
         {error && <ErrorState refetch={refetch} />}
-
-        <Box sx={{ width: '100%', height: { xs: 250, md: 320 } }}>
-          <ResponsiveContainer width='100%' height='100%'>
-            <PieChart>
-              <Pie
-                data={[
-                  { name: 'Images', value: data?.images || 0 },
-                  { name: 'Videos', value: data?.videos || 0 },
-                ]}
-                dataKey='value'
-                innerRadius={50}
-                outerRadius={80}
-              >
-                <Cell fill='#f97316' />
-                <Cell fill='#3b82f6' />
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </Box>
+        {!isLoading && !error && (
+          <Box
+            display='grid'
+            gridTemplateColumns={{ xs: '1fr', md: '1fr 1fr' }}
+            gap={4}
+          >
+            <Box sx={{ width: '100%', height: 300 }}>
+              <ResponsiveContainer>
+                <PieChart>
+                  <Pie
+                    data={chartData}
+                    dataKey='value'
+                    innerRadius={50}
+                    outerRadius={80}
+                  >
+                    <Cell fill='#f97316' />
+                    <Cell fill='#3b82f6' />
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </Box>
+            <Box sx={{ width: '100%', height: 300 }}>
+              <ResponsiveContainer>
+                <BarChart data={chartData}>
+                  <CartesianGrid strokeDasharray='3 3' />
+                  <XAxis dataKey='name' />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey='value'>
+                    <Cell fill='#f97316' />
+                    <Cell fill='#3b82f6' />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </Box>
+          </Box>
+        )}
       </Paper>
     </Box>
   )

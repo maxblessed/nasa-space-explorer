@@ -2,7 +2,7 @@ import { Box, Typography, Card } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import { useApodRange } from '../hooks/useApodRange'
-import LazyImage from '../../../shared/components/lazyImage'
+import MediaTile from '../../../shared/components/MediaTile'
 import type { ApodResponse } from '../types/types'
 
 export default function ApodPreview() {
@@ -13,7 +13,7 @@ export default function ApodPreview() {
     dayjs().format('YYYY-MM-DD'),
     1,
   )
-  console.log('Preview data', data)
+
   return (
     <Box sx={{ px: { xs: 2, md: 8 }, mt: 4 }}>
       <Typography variant='h4' fontWeight={700}>
@@ -50,7 +50,11 @@ export default function ApodPreview() {
             }}
           >
             <Box sx={{ position: 'relative', overflow: 'hidden' }}>
-              <LazyImage src={item.url} height={160} />
+              <MediaTile
+                url={item.url}
+                media_type={item.media_type}
+                title={item.title}
+              />
 
               <Box
                 sx={{

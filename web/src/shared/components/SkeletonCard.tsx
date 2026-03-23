@@ -1,6 +1,6 @@
 import { Box, Skeleton } from '@mui/material'
 
-export default function GallerySkeleton() {
+export default function SkeletonCard() {
   return (
     <Box
       display='grid'

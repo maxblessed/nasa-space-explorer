@@ -27,7 +27,7 @@ export default function Logo() {
           letterSpacing: 1,
         }}
       >
-        A91.COM
+        Nasa Explorer
       </Typography>
     </Box>
   )

@@ -1,5 +1,4 @@
 import {
-  Box,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -9,6 +8,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close'
 import dayjs from 'dayjs'
 import type { ApodResponse } from '../../features/apod/types/types'
+import MediaTile from './MediaTile'
 
 interface ModalProps {
   item: ApodResponse | null
@@ -37,30 +37,16 @@ export default function Modal({ item, setItem }: ModalProps) {
           </DialogTitle>
 
           <DialogContent dividers>
-            {item.media_type === 'image' ? (
-              <Box
-                component='img'
-                src={item.url}
-                sx={{
-                  width: '100%',
-                  borderRadius: 2,
-                  mb: 2,
-                  height: 400,
-                  objectFit: 'cover',
-                }}
-              />
-            ) : (
-              <iframe
-                src={item.url}
-                width='100%'
-                height='400'
-                style={{ borderRadius: 8 }}
-              />
-            )}
-
+            <MediaTile
+              url={item.url}
+              media_type={item.media_type}
+              title={item.title}
+              showControls={true}
+              height={400}
+            />
             <Typography
               variant='caption'
-              sx={{ color: 'text.secondary', display: 'block', mb: 2 }}
+              sx={{ color: 'text.secondary', display: 'block', my: 2 }}
             >
               {dayjs(item.date).format('MMM D, YYYY')}
             </Typography>

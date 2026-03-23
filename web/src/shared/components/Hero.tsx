@@ -1,9 +1,18 @@
 import { Box, Typography } from '@mui/material'
 import { useApod } from '../../features/apod/hooks/useApod'
 import dayjs from 'dayjs'
+import ChartSkeleton from './ChartSkeleton'
 
+const mediaStyles = {
+  position: 'absolute',
+  inset: 0,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  zIndex: 0,
+}
 export default function Hero() {
-  const { data } = useApod()
+  const { data, isLoading } = useApod()
 
   const isVideo = data?.media_type === 'video'
 
@@ -16,22 +25,32 @@ export default function Hero() {
         overflow: 'hidden',
       }}
     >
-      {!isVideo ? (
+      {isLoading ? (
+        <ChartSkeleton />
+      ) : !isVideo ? (
         <Box
           sx={{
-            position: 'absolute',
-            inset: 0,
+            ...mediaStyles,
             backgroundImage: `url(${data?.url})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
-      ) : (
-        <iframe
-          src={data?.url}
-          title='space-video'
-          style={{ width: '100%', height: '100%', border: 'none' }}
+      ) : data?.url?.includes('youtube') ? (
+        <Box
+          component='iframe'
+          src={data.url}
+          title={data.title}
+          sx={{
+            ...mediaStyles,
+            border: 'none',
+          }}
+          allowFullScreen
         />
+      ) : (
+        <Box component='video' sx={mediaStyles}>
+          <source src={data.url} type='video/mp4' />
+        </Box>
       )}
       <Box
         sx={{

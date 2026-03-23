@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { HttpBadRequestError } from '../utils/errorHandler'
 
 const MAX_RANGE = 30
 
@@ -18,7 +19,7 @@ export const validateDate = (startDate: string, endDate: string) => {
 
   // Invalid order
   if (start.isAfter(end)) {
-    throw new Error('Start date cannot be after end date')
+    throw new HttpBadRequestError('Start date cannot be after end date')
   }
 
   if (end.diff(start, 'day') > MAX_RANGE) {

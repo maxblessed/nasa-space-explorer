@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-
+import { errorMiddleware } from './utils/errorHandler'
 import apodRoutes from './modules/apod/apod.routes'
 
 const app = express()
@@ -21,5 +21,6 @@ app.get('/health', (_, res) => {
 })
 
 app.use('/api/apod', apodRoutes)
+app.use(errorMiddleware)
 
 export default app

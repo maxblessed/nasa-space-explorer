@@ -11,7 +11,7 @@ import { DatePicker } from '@mui/x-date-pickers'
 import { useApodRange } from '../features/apod/hooks/useApodRange'
 import SkeletonCard from '../shared/components/SkeletonCard'
 import Modal from '../shared/components/Modal'
-import LazyImage from '../shared/components/lazyImage'
+import MediaTile from '../shared/components/MediaTile'
 import ErrorState from '../shared/components/ErrorState'
 import { useDateRange } from '../shared/hooks/useDateRange'
 import dayjs from 'dayjs'
@@ -132,23 +132,11 @@ export default function Gallery() {
               '&:hover img': { transform: 'scale(1.05)' },
             }}
           >
-            {item.media_type === 'image' ? (
-              <LazyImage src={item.url} height={160} />
-            ) : (
-              <Box
-                sx={{
-                  height: 160,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: '#000',
-                  color: 'text.primary',
-                  fontSize: 14,
-                }}
-              >
-                <iframe src={item.url} width='100%' height='160'></iframe>.
-              </Box>
-            )}
+            <MediaTile
+              url={item.url}
+              media_type={item.media_type}
+              title={item.title}
+            />
             <CardContent>
               <Typography
                 variant='subtitle1'
